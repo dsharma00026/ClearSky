@@ -8,7 +8,7 @@ use  App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
 
 
-class AuthController extends Controller
+class MainController extends Controller
 {
     //Ragister functon to store user data in database
     function ragister(Request $request){
@@ -34,9 +34,10 @@ class AuthController extends Controller
         $user->user_password    = Hash::make($request->user_password); // Hash here ✅
       
         if($user->save()){
+            session()->flash('status', 'Ragister Succesfylly now please login');
             return view('login');
         }else{
-            session()->flash('error', 'Something went wrong!');
+            session()->flash('status', 'Something went wrong!');
            return redirect('ragister');
         }
 
@@ -56,11 +57,25 @@ class AuthController extends Controller
         session(['user_email' => $user->user_email]);
         session(['user_name' =>$user->user_name]);
         session(['user_city'=>$user->user_city]);
+        session(['user_check'=>1]);
         return redirect('/');
     } else {
         // ❌ Email not found or password incorrect
-          session(['login' =>'Invalid crendentials']);
+          session()->flash('status' ,'Invalid crendentials');
         return redirect('login');
        }
+    }
+
+
+    function dashboard(){
+        if(session('user_check')){
+            return view('dashboard');
+        }else{
+            session()->flash('status', 'Please login first!');
+            return view('login');
+            
+
+        }
+
     }
 }

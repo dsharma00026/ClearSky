@@ -5,8 +5,8 @@
   <form method="POST" action="login" class="bg-white p-4 rounded shadow" style="width: 100%; max-width: 400px;">
     <h3 class="text-center mb-4">Login</h3>
     @csrf
-    @if(session('login'))
-  <div class="alert alert-danger">{{ session('login') }}</div>
+    @if(session('status'))
+  <div class="alert alert-danger">{{ session('status') }}</div>
 @endif
     <div class="mb-3">
       <label class="form-label">Username</label>

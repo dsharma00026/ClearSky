@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +14,16 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
+Route::get('/',[MainController::class,'dashboard']);
+
 
 Route::view('login','login');
-Route::post('login',[AuthController::class,'login']);
+Route::post('login',[MainController::class,'login']);
 
 
 Route::view('ragister','ragister');
-Route::post('ragister',[AuthController::class,'ragister']);
+Route::post('ragister',[MainController::class,'ragister']);
 
 
 Route::view('about','about');
