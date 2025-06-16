@@ -4,12 +4,12 @@
 <!-- Blue background section -->
 <div class="py-5 px-4 rounded text-white" style="background-color:rgb(49, 108, 172);"> <!-- Bootstrap blue -->
 
-  <h2 class="mb-4 text-center">Welcome Deepak Sharma</h2>
+  <h2 class="mb-4 text-center">Welcome {{session('user_name')}}</h2>
 
   <!-- Form -->
   <form class="row g-3 mb-5 justify-content-center" method="GET" action="#">
     <div class="col-md-5">
-      <input type="text" name="city" class="form-control" placeholder="Enter City Name" required>
+      <input type="text" name="city" class="form-control" placeholder="Enter City Name" value="{{session('user_city')}}">
     </div>
 
     <div class="col-md-2">
