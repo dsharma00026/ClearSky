@@ -23,6 +23,11 @@
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/about') }}">About</a></li>
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/terms') }}">Terms</a></li>
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/contact') }}">Contact Us</a></li>
+        @if(session('user_check'))
+        <a href="{{ route('logout') }}" class="btn btn-danger">
+        Logout
+    </a>
+        @endif
       </ul>
     </div>
   </div>

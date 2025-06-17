@@ -97,17 +97,16 @@ class MainController extends Controller
 
     }
 
-    function logout(){
+    function logout(Request $request){
       // Remove all session data
      $request->session()->flush();
 
-     // Or remove only specific keys (optional)
-     // $request->session()->forget('user_check');
-
-     // Optionally flash a message
+     //  flash a  logout message
      session()->flash('status', 'You have been logged out.');
 
      // Redirect to login or home
      return redirect('login');
      }
+
+    
 }

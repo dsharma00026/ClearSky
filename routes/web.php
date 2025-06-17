@@ -29,3 +29,6 @@ Route::post('ragister',[MainController::class,'ragister']);
 Route::view('about','about');
 Route::view('terms','terms');
 Route::view('contact','contact_us');
+
+
+Route::get('/logout', [MainController::class, 'logout'])->name('logout');
