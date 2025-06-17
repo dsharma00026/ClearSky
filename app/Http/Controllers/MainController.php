@@ -86,6 +86,10 @@ class MainController extends Controller
 
     }
 
+    function getCityName(Request $request){
+            return $this->fetchApiData($request->user_city);
+    }
+
 
     function fetchApiData($cityName){
 
@@ -93,7 +97,7 @@ class MainController extends Controller
          $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";
          $fetchData=Http::get($url);
          $fetchData->body();
-         return view('dashboard',['Data'=>$fetchData->json()]);
+         return view('dashboard',['Data'=>$fetchData->json(),'city_name'=>$cityName]);
 
     }
 
@@ -101,7 +105,7 @@ class MainController extends Controller
       // Remove all session data
      $request->session()->flush();
 
-     //  flash a  logout message
+     //  flash a message
      session()->flash('status', 'You have been logged out.');
 
      // Redirect to login or home

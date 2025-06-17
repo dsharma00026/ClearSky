@@ -7,9 +7,10 @@
   <h2 class="mb-4 text-center">Welcome {{session('user_name')}}</h2>
 
   <!-- Form -->
-  <form class="row g-3 mb-5 justify-content-center" method="GET" action="#">
+  <form class="row g-3 mb-5 justify-content-center" method="post" action="/">
+    @csrf
     <div class="col-md-5">
-      <input type="text" name="city" class="form-control" placeholder="Enter City Name" value="{{session('user_city')}}">
+      <input type="text" name="user_city" class="form-control" placeholder="Enter City Name" value="{{$city_name}}">
     </div>
 
     <div class="col-md-2">
@@ -19,7 +20,7 @@
 
 </div><br><br>
 <div class="py-5 px-4 rounded text-white" style="background-color:rgb(210, 208, 208);">
-    <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Whether infromatin of Jalandhar</h4>
+    <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Whether infromatin of {{$city_name}}.[{{$Data['location']['country']}}]</h4>
     
 
  

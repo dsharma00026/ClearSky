@@ -16,6 +16,7 @@ use App\Http\Controllers\MainController;
 
 
 Route::get('/',[MainController::class,'dashboard']);
+Route::post('/',[MainController::class,'getCityName']);
 
 
 Route::view('login','login');
