@@ -15,21 +15,25 @@ use App\Http\Controllers\MainController;
 */
 
 
-Route::get('/',[MainController::class,'dashboard'])->name('dashboard');
-Route::post('/',[MainController::class,'getCityName'])->name('city.submit');
+// Dashboard and Weather Routes
+Route::controller(MainController::class)->group(function () {
+    Route::get('/', 'dashboard')->name('dashboard');
+    Route::post('/', 'getCityName')->name('city.submit');
+    Route::get('/logout', 'logout')->name('logout');
+});
 
+// Auth Routes (Login/Register)
+Route::prefix('login')->controller(MainController::class)->group(function () {
+    Route::view('/', 'login')->name('login.form');
+    Route::post('/', 'login')->name('login.submit');
+});
 
-Route::view('login','login')->name('login.form');
-Route::post('login',[MainController::class,'login'])->name('login.submit');
+Route::prefix('register')->controller(MainController::class)->group(function () {
+    Route::view('/', 'ragister')->name('register.form');
+    Route::post('/', 'register')->name('register.submit');
+});
 
-
-Route::view('register','ragister')->name('register.form');
-Route::post('register',[MainController::class,'register'])->name('register.submit');
-
-
-Route::view('about','about')->name('about');
-Route::view('terms','terms')->name('terms');
-Route::view('contact','contact_us')->name('contact');
-
-
-Route::get('/logout', [MainController::class, 'logout'])->name('logout');
+// Static Pages
+Route::view('about', 'about')->name('about');
+Route::view('terms', 'terms')->name('terms');
+Route::view('contact', 'contact_us')->name('contact');

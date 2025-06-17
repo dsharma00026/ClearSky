@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Http;
 
 class MainController extends Controller
 {
-    //Ragister functon to store user data in database
+    //Ragister functon here our reigister algorithem
     function register(Request $request){
     
+        //here  we apply validation of check user input correct or not
         $request->validate([
         'user_name'     => 'required|string|min:3|max:50',
         'user_email'  => 'required|email|unique:userdata,user_email',
@@ -31,34 +32,42 @@ class MainController extends Controller
         'user_mobile'   => $request->user_mobile,
         'user_country'  => $request->user_country,
         'user_city'     => $request->user_city,
-        'user_password' => Hash::make($request->user_password),
+        'user_password' => Hash::make($request->user_password),//make password in hash fromat for sequirty
          ]);
       
+
+         //here we save data in databse and move user froward to designation page with session message 
      if($user->save()){
               return redirect()->route('login.form')->with('status','Register Succesfylly! now please login');
              }else{
               return redirect()->route('register.form')->with('status', 'Something went wrong!');
-             }
+              }
 
 
     }
 
 
+    //login functin here our login algorithem
     function login(Request $request){
+        //here  we apply validation of check user input correct or not
         $request->validate([
             'user_email'  => 'required|email',
             'user_password'   => 'required',
         ]);
 
+        //get user data based on email
           $user = Userdata::where('user_email', $request->user_email)->first();
 
+          //here we check fetch data password to user enter passwrod
         if ($user && Hash::check($request->user_password, $user->user_password)) {
              // ✅ Login successful
-             $request->session()->regenerate();
+             $request->session()->regenerate();//for prevent session attack
+             //create session
              session(['user_email' => $user->user_email]);
              session(['user_name' =>$user->user_name]);
              session(['user_city'=>$user->user_city]);
              session(['user_check'=>1]);
+             //move dashboard page
         return redirect()->route('dashboard');
         } else {
         // ❌ Email not found or password incorrect
@@ -68,36 +77,40 @@ class MainController extends Controller
 
 
 
-
-
-
-
+    //fucntion for dashboard 
     function dashboard(){
+        //check user login or not
         if(session('user_check')){
             return $this->fetchApiData(session('user_city'));
            //here call another method to fetch data;
             
         }else{
+            //not login move login page with error message
             return redirect()->route('login.form')->with('status', 'Please login first!');
             
         }
 
     }
 
+    //function for dashboard from 
     function getCityName(Request $request){
+        //get data from dashboard from where user entered city
             return $this->fetchApiData($request->user_city);
     }
 
 
+    //function for fetch data from api and show in ui
     function fetchApiData($cityName){
-         $apiKey = env('WEATHER_API_KEY');
+         $apiKey = env('WEATHER_API_KEY');//get api key 
          try {
-              $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";
+              $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";//call api
               $fetchData=Http::get($url);
               $fetchData->body();
-              $fullCityName=$cityName."[".$fetchData['location']['country']."]";
+              $fullCityName=$cityName."[".$fetchData['location']['country']."]";//get city name and country
+              //all well so call dashboard view with real data
           return view('dashboard',['Data'=>$fetchData->json(),'city_name'=>$cityName,'fullCityName'=>$fullCityName]);
          } catch (\Throwable $th) {
+            //if get any error call dashboard ui with error handling
               return view('dashboard',['city_name'=>$cityName,'fullCityName'=>'Data not fetch maybe wrong city enterd Or something went wrong']);
          }
         
@@ -105,6 +118,7 @@ class MainController extends Controller
 
     }
 
+    //logout functonality
     function logout(Request $request){
       // Remove all session data
      $request->session()->flush();
