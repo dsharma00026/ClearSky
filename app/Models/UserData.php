@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserData extends Model
 {
         protected $table = 'userdata';
+        //for disabled fillable exception
+        protected $guarded = [];
     use HasFactory;
 }

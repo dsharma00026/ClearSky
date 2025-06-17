@@ -1,8 +1,9 @@
 @extends('layout.root')
 
 @section('content')
+
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-  <form method="POST" action="login" class="bg-white p-4 rounded shadow" style="width: 100%; max-width: 400px;">
+  <form method="POST" action="{{route('login.submit')}}" class="bg-white p-4 rounded shadow" style="width: 100%; max-width: 400px;">
     <h3 class="text-center mb-4">Login</h3>
     @csrf
     @if(session('status'))
@@ -21,7 +22,7 @@
 
     </div>
     <button type="submit" class="btn btn-primary w-100">Login</button>
-   <h6>Note haven't account</h6><a href="/ragister">Ragister here</a>  
+   <h6>Note haven't account</h6><a href="{{route('register.form')}}">Register here</a>  
   </form>
 </div>
 @endsection

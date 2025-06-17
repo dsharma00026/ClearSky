@@ -4,7 +4,7 @@
 
  
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-<form method="POST" action="ragister" class="bg-white p-4 rounded shadow" style="width: 100%; max-width: 400px;">
+<form method="POST" action="{{route('register.submit')}}" class="bg-white p-4 rounded shadow" style="width: 100%; max-width: 400px;">
   @csrf
   <h3 class="text-center mb-4">Register</h3>
   @if(session('status'))
@@ -50,7 +50,7 @@
 
   </div>
   <button type="submit" class="btn btn-primary w-100">Register</button>
-  <h6>Already have account</h6><a href="/login">Login here</a>
+  <h6>Already have account</h6><a href="{{route('login.form')}}">Login here</a>
 </form>
 </div>
 @endsection

@@ -15,21 +15,21 @@ use App\Http\Controllers\MainController;
 */
 
 
-Route::get('/',[MainController::class,'dashboard']);
-Route::post('/',[MainController::class,'getCityName']);
+Route::get('/',[MainController::class,'dashboard'])->name('dashboard');
+Route::post('/',[MainController::class,'getCityName'])->name('city.submit');
 
 
-Route::view('login','login');
-Route::post('login',[MainController::class,'login']);
+Route::view('login','login')->name('login.form');
+Route::post('login',[MainController::class,'login'])->name('login.submit');
 
 
-Route::view('ragister','ragister');
-Route::post('ragister',[MainController::class,'ragister']);
+Route::view('register','ragister')->name('register.form');
+Route::post('register',[MainController::class,'register'])->name('register.submit');
 
 
-Route::view('about','about');
-Route::view('terms','terms');
-Route::view('contact','contact_us');
+Route::view('about','about')->name('about');
+Route::view('terms','terms')->name('terms');
+Route::view('contact','contact_us')->name('contact');
 
 
 Route::get('/logout', [MainController::class, 'logout'])->name('logout');

@@ -19,10 +19,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/about') }}">About</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/terms') }}">Terms</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ url('/contact') }}">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('dashboard') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('about') }}">About</a></li>
+        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('terms') }}">Terms</a></li>
+        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('contact') }}">Contact Us</a></li>
         @if(session('user_check'))
         <a href="{{ route('logout') }}" class="btn btn-danger">
         Logout

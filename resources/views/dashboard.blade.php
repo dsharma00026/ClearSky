@@ -7,7 +7,7 @@
   <h2 class="mb-4 text-center">Welcome {{session('user_name')}}</h2>
 
   <!-- Form -->
-  <form class="row g-3 mb-5 justify-content-center" method="post" action="/">
+  <form class="row g-3 mb-5 justify-content-center" method="post" action="{{route('city.submit')}}">
     @csrf
     <div class="col-md-5">
       <input type="text" name="user_city" class="form-control" placeholder="Enter City Name" value="{{$city_name}}">
