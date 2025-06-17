@@ -20,7 +20,7 @@
 
 </div><br><br>
 <div class="py-5 px-4 rounded text-white" style="background-color:rgb(210, 208, 208);">
-    <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Whether infromatin of {{$city_name}}.[{{$Data['location']['country']}}]</h4>
+    <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Whether infromatin of {{$fullCityName}}</h4>
     
 
  
@@ -33,7 +33,12 @@
       <div class="card-body">
         <i class="bi bi-thermometer-half fs-2 text-danger"></i>
         <h6 class="mt-2">Temperature</h6>
-        <p class="mb-0">{{$Data['current']['temp_c']}}</p>
+        <p class="mb-0">
+        @if(isset($Data['current']['temp_c']))  
+        {{$Data['current']['temp_c']}}
+        @else N/A
+        @endif  
+      </p>
       </div>
     </div>
   </div>
@@ -44,7 +49,12 @@
       <div class="card-body">
         <i class="bi bi-cloud-sun fs-2 text-warning"></i>
         <h6 class="mt-2">Condition</h6>
-        <p class="mb-0">{{$Data['current']['condition']['text']}}</p>
+        <p class="mb-0">
+        @if(isset($Data['current']['condition']['text']))  
+        {{$Data['current']['condition']['text']}}
+        @else N\A
+        @endif
+      </p>
       </div>
     </div>
   </div>
@@ -55,7 +65,12 @@
       <div class="card-body">
         <i class="bi bi-droplet-fill fs-2 text-primary"></i>
         <h6 class="mt-2">Humidity</h6>
-        <p class="mb-0">{{$Data['current']['humidity']}}</p>
+        <p class="mb-0">
+          @if(isset($Data['current']['humidity']))  
+        {{$Data['current']['humidity']}}
+        @else N\A
+          @endif
+      </p>
       </div>
     </div>
   </div>
@@ -66,8 +81,13 @@
       <div class="card-body">
         <i class="bi bi-wind fs-2 text-info"></i>
         <h6 class="mt-2">Wind</h6>
-        <p class="mb-0">{{$Data['current']['wind_kph']."kph ".
-                                $Data['current']['wind_dir']}}</p>
+        <p class="mb-0">
+        @if(isset($Data['current']['wind_kph'])&& isset($Data['current']['wind_dir']))
+         {{$Data['current']['wind_kph']."kph ".$Data['current']['wind_dir']}}
+        @else N\A 
+        @endif 
+        
+       </p>
       </div>
     </div>
   </div>
@@ -78,7 +98,12 @@
       <div class="card-body">
         <i class="bi bi-speedometer2 fs-2 text-success"></i>
         <h6 class="mt-2">Pressure</h6>
-        <p class="mb-0">{{$Data['current']['pressure_mb']}}</p>
+        <p class="mb-0">
+        @if(isset($Data['current']['pressure_mb'] ))
+         {{$Data['current']['pressure_mb']}}
+        @else N\A 
+        @endif   
+       </p>
       </div>
     </div>
   </div>
@@ -89,7 +114,12 @@
       <div class="card-body">
         <i class="bi bi-person-hearts fs-2 text-danger"></i>
         <h6 class="mt-2">Feels Like</h6>
-        <p class="mb-0">{{$Data['current']['feelslike_c']}}</p>
+        <p class="mb-0">
+        @if(isset($Data['current']['feelslike_c']))
+        {{$Data['current']['feelslike_c'] ?? 'N/A'}}
+        @else N\A 
+        @endif   
+        </p>
       </div>
     </div>
   </div>
@@ -100,7 +130,12 @@
       <div class="card-body">
         <i class="bi bi-eye-fill fs-2 text-secondary"></i>
         <h6 class="mt-2">Visibility</h6>
-        <p class="mb-0">{{$Data['current']['vis_km']."km"}}</p>
+        <p class="mb-0">
+        @if(isset($Data['current']['vis_km']))
+        {{$Data['current']['vis_km']."km"}}
+        @else N\A 
+        @endif   
+ </p>
       </div>
     </div>
   </div>
@@ -111,8 +146,13 @@
       <div class="card-body">
         <i class="bi bi-sunrise fs-2 text-warning"></i>
         <h6 class="mt-2">Sunrise / Sunset</h6>
-        <p class="mb-0">{{$Data['forecast']['forecastday'][0]['astro']['sunrise']." / ".
-                          $Data['forecast']['forecastday'][0]['astro']['sunset']}}</p>
+        <p class="mb-0">
+        @if(isset($Data['forecast']['forecastday'][0]['astro']['sunrise'] )&& isset($Data['forecast']['forecastday'][0]['astro']['sunset']))
+         {{$Data['forecast']['forecastday'][0]['astro']['sunrise']." / ". 
+                          $Data['forecast']['forecastday'][0]['astro']['sunset']}}
+        @else N\A 
+        @endif   
+       </p>
       </div>
     </div>
   </div>

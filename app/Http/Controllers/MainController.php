@@ -92,12 +92,18 @@ class MainController extends Controller
 
 
     function fetchApiData($cityName){
-
          $apiKey = env('WEATHER_API_KEY');
-         $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";
-         $fetchData=Http::get($url);
-         $fetchData->body();
-         return view('dashboard',['Data'=>$fetchData->json(),'city_name'=>$cityName]);
+         try {
+             $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";
+             $fetchData=Http::get($url);
+              $fetchData->body();
+              $fullCityName=$cityName."[".$fetchData['location']['country']."]";
+          return view('dashboard',['Data'=>$fetchData->json(),'city_name'=>$cityName,'fullCityName'=>$fullCityName]);
+         } catch (\Throwable $th) {
+              return view('dashboard',['city_name'=>$cityName,'fullCityName'=>'Data not fetch maybe wrong city enterd Or something went wrong']);
+         }
+        
+         
 
     }
 
