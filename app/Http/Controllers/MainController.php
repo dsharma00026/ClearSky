@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  App\Models\UserData;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 
 class MainController extends Controller
@@ -67,15 +68,46 @@ class MainController extends Controller
     }
 
 
+
+
+
+
+
     function dashboard(){
         if(session('user_check')){
-            return view('dashboard');
+            return $this->fetchApiData(session('user_city'));
+           //here call another method to fetch data;
+            
         }else{
             session()->flash('status', 'Please login first!');
             return view('login');
             
-
         }
 
     }
+
+
+    function fetchApiData($cityName){
+
+         $apiKey = env('WEATHER_API_KEY');
+         $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";
+         $fetchData=Http::get($url);
+         $fetchData->body();
+         return view('dashboard',['Data'=>$fetchData->json()]);
+
+    }
+
+    function logout(){
+      // Remove all session data
+     $request->session()->flush();
+
+     // Or remove only specific keys (optional)
+     // $request->session()->forget('user_check');
+
+     // Optionally flash a message
+     session()->flash('status', 'You have been logged out.');
+
+     // Redirect to login or home
+     return redirect('login');
+     }
 }
