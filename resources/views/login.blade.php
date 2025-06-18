@@ -21,17 +21,17 @@
     <div class="mb-3">
       <label class="form-label">Username</label>
       <input type="text" class="form-control" name="user_email" value="{{old('user_email')}}">
-      <span style="color: red;">@error('user_email'){{$message}}@enderror</span> 
+      <span class="text-danger">@error('user_email'){{$message}}@enderror</span> 
 
     </div>
     <div class="mb-3">
       <label class="form-label">Password</label>
       <input type="password" class="form-control" name="user_password" >
-       <span style="color: red;">@error('user_password'){{$message}}@enderror</span> 
+       <span class="text-danger">@error('user_password'){{$message}}@enderror</span> 
 
     </div>
     <button type="submit" class="btn btn-primary w-100">Login</button>
-   <h6>Note haven't account</h6><a href="{{route('register.form')}}">Register here</a>  
+   <p class="mt-3 mb-0 ">Don't have a account?<a href="{{route('register.form')}}">Register here</a></p>  
   </form>
 </div>
 @endsection

@@ -22,42 +22,42 @@
   <div class="mb-3">
     <label>Name</label>
     <input type="text" class="form-control" name="user_name" value="{{old('user_name')}}">
-        <span style="color: red;">@error('user_name'){{$message}}@enderror</span> 
+        <span class="text-danger">@error('user_name'){{$message}}@enderror</span> 
 
   </div>
 
   <div class="mb-3">
     <label>Email</label>
     <input type="text" class="form-control" name="user_email" value="{{old('user_email')}}">
-    <span style="color: red;">@error('user_email'){{$message}}@enderror</span> 
+    <span class="text-danger">@error('user_email'){{$message}}@enderror</span> 
 
   </div>
   <div class="mb-3">
     <label>Mobile</label>
     <input type="text" class="form-control" name="user_mobile" value="{{old('user_mobile')}}">
-    <span style="color: red;">@error('user_mobile'){{$message}}@enderror</span> 
+    <span class="text-danger">@error('user_mobile'){{$message}}@enderror</span> 
 
   </div>
   <div class="mb-3">
     <label>Password</label>
     <input type="password" class="form-control" name="user_password">
-    <span style="color: red;">@error('user_password'){{$message}}@enderror</span> 
+    <span class="text-danger">@error('user_password'){{$message}}@enderror</span> 
 
   </div>
   <div class="mb-3">
     <label>Country</label>
     <input type="text" class="form-control" name="user_country" value="{{old('user_country')}}">
-    <span style="color: red;">@error('user_country'){{$message}}@enderror</span> 
+    <span class="text-danger">@error('user_country'){{$message}}@enderror</span> 
  
   </div>
   <div class="mb-3">
     <label>City</label>
     <input type="text" class="form-control" name="user_city" value="{{old('user_city')}}">
-    <span style="color: red;">@error('user_city'){{$message}}@enderror</span> 
+    <span class="text-danger">@error('user_city'){{$message}}@enderror</span> 
 
   </div>
   <button type="submit" class="btn btn-primary w-100">Register</button>
-  <h6>Already have account</h6><a href="{{route('login.form')}}">Login here</a>
+  <p class="mt-3 mt-0" >Already have an account?<a href="{{route('login.form')}}">Login here</a></p>
 </form>
 </div>
 @endsection

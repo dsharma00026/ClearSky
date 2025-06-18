@@ -24,37 +24,37 @@
         <!-- Contact Form Card -->
         <div class="card shadow mt-4 rounded-4">
             <div class="card-body p-4">
-                <form >
+              
                     <div class="mb-3">
                         <label class="form-label">Your Name</label>
                         <input type="text" class="form-control rounded-3" name="user_name" placeholder="Enter your name" value="{{old('user_name')}}" >
-                        <span style="color: red;">@error('user_name'){{$message}}@enderror</span> 
+                        <span class="text-danger">@error('user_name'){{$message}}@enderror</span> 
 
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Your Email</label>
                         <input type="text" class="form-control rounded-3" name="user_email" placeholder="Enter your email" value="{{old('user_email')}}">
-                        <span style="color: red;">@error('user_email'){{$message}}@enderror</span> 
+                        <span class="text-danger">@error('user_email'){{$message}}@enderror</span> 
  
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Subject</label>
                         <input type="text" class="form-control rounded-3" name="user_subject" placeholder="Subject" value="{{old('user_subject')}}">
-                        <span style="color: red;">@error('user_subject'){{$message}}@enderror</span> 
+                        <span class="text-danger">@error('user_subject'){{$message}}@enderror</span> 
     
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Your Message</label>
-                        <textarea class="form-control rounded-3" name="user_message" rows="4" placeholder="Write your message..." value="{{old('user_message')}}"></textarea>
-                        <span style="color: red;">@error('user_message'){{$message}}@enderror</span> 
+                        <textarea class="form-control rounded-3" name="user_message" rows="4" placeholder="Write your message..." value="">{{old('user_message')}}</textarea>
+                        <span class="text-danger">@error('user_message'){{$message}}@enderror</span> 
 
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 rounded-3">Send Message</button>
-                </form>
+                
             </div>
         </div>
 

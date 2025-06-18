@@ -19,14 +19,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('dashboard') }}">Home</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('about') }}">About</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('terms') }}">Terms</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('contact_us.form') }}">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link text-white"  href="{{ route ('dashboard') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white"  href="{{ route ('about') }}">About</a></li>
+        <li class="nav-item"><a class="nav-link text-white"  href="{{ route('terms') }}">Terms</a></li>
+        <li class="nav-item"><a class="nav-link text-white"  href="{{ route('contact_us.form') }}">Contact Us</a></li>
         @if(session('user_id'))
-        <a href="{{ route('logout') }}" class="btn btn-danger">
-        Logout
-    </a>
+       <li class="nav-item"><a class="nav-link btn btn-danger text-white ms-2" href="{{ route('logout') }}">Logout</a></li>
+       
         @endif
       </ul>
     </div>

@@ -29,7 +29,7 @@ Route::controller(MainController::class)->group(function () {
 });
 
 Route::controller(MainController::class)->group(function () {
-    Route::view('register', 'ragister')->name('register.form');
+    Route::view('register', 'register')->name('register.form');
     Route::post('register', 'register')->name('register.submit');
 });
 

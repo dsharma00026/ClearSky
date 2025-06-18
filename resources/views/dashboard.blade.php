@@ -30,7 +30,7 @@
 
 </div><br><br>
 <div class="py-5 px-4 rounded text-white" style="background-color:rgb(210, 208, 208);">
-    <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Whether infromatin of {{$fullCityName}}</h4>
+    <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Weather Information of {{$fullCityName}}</h4>
     
 
  
@@ -46,7 +46,7 @@
         <p class="mb-0">
         @if(isset($Data['current']['temp_c']))  
         {{$Data['current']['temp_c']}}
-        @else N/A
+        @else "N/A"
         @endif  
       </p>
       </div>
@@ -62,7 +62,7 @@
         <p class="mb-0">
         @if(isset($Data['current']['condition']['text']))  
         {{$Data['current']['condition']['text']}}
-        @else N\A
+        @else "N/A"
         @endif
       </p>
       </div>
@@ -78,7 +78,7 @@
         <p class="mb-0">
           @if(isset($Data['current']['humidity']))  
         {{$Data['current']['humidity']}}
-        @else N\A
+        @else "N/A"
           @endif
       </p>
       </div>
@@ -94,7 +94,7 @@
         <p class="mb-0">
         @if(isset($Data['current']['wind_kph'])&& isset($Data['current']['wind_dir']))
          {{$Data['current']['wind_kph']."kph ".$Data['current']['wind_dir']}}
-        @else N\A 
+        @else "N/A" 
         @endif 
         
        </p>
@@ -111,7 +111,7 @@
         <p class="mb-0">
         @if(isset($Data['current']['pressure_mb'] ))
          {{$Data['current']['pressure_mb']}}
-        @else N\A 
+        @else "N/A" 
         @endif   
        </p>
       </div>
@@ -127,7 +127,7 @@
         <p class="mb-0">
         @if(isset($Data['current']['feelslike_c']))
         {{$Data['current']['feelslike_c'] ?? 'N/A'}}
-        @else N\A 
+        @else "N/A"
         @endif   
         </p>
       </div>
@@ -143,7 +143,7 @@
         <p class="mb-0">
         @if(isset($Data['current']['vis_km']))
         {{$Data['current']['vis_km']."km"}}
-        @else N\A 
+        @else "N/A" 
         @endif   
  </p>
       </div>
@@ -160,7 +160,7 @@
         @if(isset($Data['forecast']['forecastday'][0]['astro']['sunrise'] )&& isset($Data['forecast']['forecastday'][0]['astro']['sunset']))
          {{$Data['forecast']['forecastday'][0]['astro']['sunrise']." / ". 
                           $Data['forecast']['forecastday'][0]['astro']['sunset']}}
-        @else N\A 
+        @else "N/A"
         @endif   
        </p>
       </div>

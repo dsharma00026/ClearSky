@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Http;
 
 class MainController extends Controller
 {
-    //Ragister functon here our reigister algorithem
+    //Register functon here our register algorithem
     function register(Request $request){
     
         //here  we apply validation of check user input correct or not
@@ -34,7 +34,7 @@ class MainController extends Controller
          $user->user_mobile = $request->user_mobile;
          $user->user_country = $request->user_country;
          $user->user_city = $request->user_city;
-         $user->user_password = Hash::make($request->user_password);//herw we hash password for sequirty
+         $user->user_password = Hash::make($request->user_password);//here we hash password for sequirty
 
          //here we save data in databse and move user froward to designation page with session message 
      if($user->save()){
@@ -107,13 +107,13 @@ class MainController extends Controller
     function fetchApiData($cityName){
          $apiKey = env('WEATHER_API_KEY');//get api key 
          try {
-              $url="http://api.weatherapi.com/v1//forecast.json?key=$apiKey&q=$cityName";//call api
+              $url="http://api.weatherapi.com/v1/forecast.json?key=$apiKey&q=$cityName";//call api
               $fetchData=Http::get($url);
               $fetchData->body();
               $fullCityName=$cityName."[".$fetchData['location']['country']."]";//get city name and country
 
               //here we fetch data from db and show in dashboard in recent 
-                $recentCity = Recentcity::where('user_id', session('user_id'))
+                $recentCity = RecentCity::where('user_id', session('user_id'))
                       ->orderBy('created_at', 'desc')
                       ->take(5)
                       ->get();
@@ -165,7 +165,7 @@ class MainController extends Controller
               return redirect()->route('contact_us.form')->with('success', 'Thank you for contacting us. We have received your message and will get back to you soon.');
              }else{
               return redirect()->route('contact_us.form')->with('failed', 'Something went wrong! Please try again after some time');
-              }
+            }
 
 
      }
