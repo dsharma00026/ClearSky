@@ -33,7 +33,16 @@ Route::controller(MainController::class)->group(function () {
     Route::post('register', 'register')->name('register.submit');
 });
 
+
+
+//Contact us page
+Route::controller(MainController::class)->group(function (){
+    Route::view('contact','contact_us')->name('contact_us.form');
+    Route::post('contact','contact')->name('contact_us.submit');
+
+});
+
+
 // Static Pages
 Route::view('about', 'about')->name('about');
 Route::view('terms', 'terms')->name('terms');
-Route::view('contact', 'contact_us')->name('contact');

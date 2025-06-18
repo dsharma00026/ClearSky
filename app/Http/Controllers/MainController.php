@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use  App\Models\UserData;
+use  App\Models\Contact;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
@@ -125,5 +126,37 @@ class MainController extends Controller
      return redirect()->route('login.form')->with('success', 'You have been logged out.');
      }
 
+
+
+
+     //here we handle contact us page
+     function contact(Request $request){
+         //here  we apply validation of contact from page
+        $request->validate([
+             'user_name' => 'required|string|min:03|max:20',
+             'user_email' => 'required|email',
+             'user_message'=>'required|string|min:03|max:500',//set limit of msg here
+             'user_subject' => 'required|string|min:03|max:50', //  Set limit of subject here
+         ]);
+
+         //here we store user data
+         $ContactUs = new Contact();
+          $ContactUs->user_name = $request->user_name;
+          $ContactUs->user_email = $request->user_email;
+          $ContactUs->user_subject = $request->user_subject;
+          $ContactUs->user_message = $request->user_message;
+
+         //here we save data in databse and move user froward to designation page with session message 
+        if($ContactUs->save()){
+              return redirect()->route('contact_us.form')->with('success', 'Thank you for contacting us. We have received your message and will get back to you soon.');
+             }else{
+              return redirect()->route('contact_us.form')->with('failed', 'Something went wrong! Please try again after some time');
+              }
+
+
+     }
+
     
 }
+
+

@@ -22,7 +22,7 @@
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('dashboard') }}">Home</a></li>
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('about') }}">About</a></li>
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('terms') }}">Terms</a></li>
-        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('contact') }}">Contact Us</a></li>
+        <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('contact_us.form') }}">Contact Us</a></li>
         @if(session('user_check'))
         <a href="{{ route('logout') }}" class="btn btn-danger">
         Logout
