@@ -23,14 +23,14 @@ Route::controller(MainController::class)->group(function () {
 });
 
 // Auth Routes (Login/Register)
-Route::prefix('login')->controller(MainController::class)->group(function () {
-    Route::view('/', 'login')->name('login.form');
-    Route::post('/', 'login')->name('login.submit');
+Route::controller(MainController::class)->group(function () {
+    Route::view('login', 'login')->name('login.form');
+    Route::post('login', 'login')->name('login.submit');
 });
 
-Route::prefix('register')->controller(MainController::class)->group(function () {
-    Route::view('/', 'ragister')->name('register.form');
-    Route::post('/', 'register')->name('register.submit');
+Route::controller(MainController::class)->group(function () {
+    Route::view('register', 'ragister')->name('register.form');
+    Route::post('register', 'register')->name('register.submit');
 });
 
 // Static Pages

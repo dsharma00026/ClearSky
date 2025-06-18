@@ -17,7 +17,7 @@ class MainController extends Controller
         //here  we apply validation of check user input correct or not
         $request->validate([
         'user_name'     => 'required|string|min:3|max:50',
-        'user_email'  => 'required|email|unique:userdata,user_email',
+        'user_email'    => 'required|email|unique:userdata,user_email',
         'user_password' => 'required|string|min:6',
         'user_mobile'   => 'required|digits:10|numeric',
         'user_country'  => 'required|string',
@@ -26,21 +26,19 @@ class MainController extends Controller
 
 
        //here we store user data
-       $user = new UserData([
-        'user_name'     => $request->user_name,
-        'user_email'    => $request->user_email,
-        'user_mobile'   => $request->user_mobile,
-        'user_country'  => $request->user_country,
-        'user_city'     => $request->user_city,
-        'user_password' => Hash::make($request->user_password),//make password in hash fromat for sequirty
-         ]);
-      
+         $user = new UserData();
+         $user->user_name = $request->user_name;
+         $user->user_email = $request->user_email;
+         $user->user_mobile = $request->user_mobile;
+         $user->user_country = $request->user_country;
+         $user->user_city = $request->user_city;
+         $user->user_password = Hash::make($request->user_password);//herw we hash password for sequirty
 
          //here we save data in databse and move user froward to designation page with session message 
      if($user->save()){
-              return redirect()->route('login.form')->with('status','Register Succesfylly! now please login');
+              return redirect()->route('login.form')->with('success','Register Succesfylly! now please login');
              }else{
-              return redirect()->route('register.form')->with('status', 'Something went wrong!');
+              return redirect()->route('register.form')->with('failed', 'Something went wrong!');
               }
 
 
@@ -63,15 +61,14 @@ class MainController extends Controller
              // ✅ Login successful
              $request->session()->regenerate();//for prevent session attack
              //create session
-             session(['user_email' => $user->user_email]);
              session(['user_name' =>$user->user_name]);
              session(['user_city'=>$user->user_city]);
-             session(['user_check'=>1]);
+             session(['user_id'=>$user->user_id]);
              //move dashboard page
         return redirect()->route('dashboard');
         } else {
         // ❌ Email not found or password incorrect
-        return redirect()->route('login.form')->with('status','Invalid crendentials');
+        return redirect()->route('login.form')->with('failed','Invalid crendentials');
         }
     }
 
@@ -80,13 +77,13 @@ class MainController extends Controller
     //fucntion for dashboard 
     function dashboard(){
         //check user login or not
-        if(session('user_check')){
+        if(session('user_id')){
             return $this->fetchApiData(session('user_city'));
            //here call another method to fetch data;
             
         }else{
             //not login move login page with error message
-            return redirect()->route('login.form')->with('status', 'Please login first!');
+            return redirect()->route('login.form')->with('failed', 'Please login first!');
             
         }
 
@@ -125,7 +122,7 @@ class MainController extends Controller
 
     
      // Redirect to login or home
-     return redirect()->route('login.form')->with('status', 'You have been logged out.');
+     return redirect()->route('login.form')->with('success', 'You have been logged out.');
      }
 
     

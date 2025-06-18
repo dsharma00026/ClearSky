@@ -6,8 +6,17 @@
   <form method="POST" action="{{route('login.submit')}}" class="bg-white p-4 rounded shadow" style="width: 100%; max-width: 400px;">
     <h3 class="text-center mb-4">Login</h3>
     @csrf
-    @if(session('status'))
-  <div class="alert alert-danger">{{ session('status') }}</div>
+    <!-- here we check flash session and show -->
+   @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('failed'))
+    <div class="alert alert-danger">
+        {{ session('failed') }}
+    </div>
 @endif
     <div class="mb-3">
       <label class="form-label">Username</label>
