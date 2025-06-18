@@ -18,6 +18,16 @@
     </div>
   </form>
 
+  <div class="col-12 mt-4 text-center">
+  <h6 class=" text-white mb-3">Recently Searched Cities</h6>
+  <div class="d-flex justify-content-center flex-wrap gap-2">
+    <!--loop for show recent city in dashboard -->
+    @foreach($recentCity as $city)
+    <span class="badge bg-white text-dark border border-secondary">{{$city->search_city}}</span>
+    @endforeach
+  </div>
+</div>
+
 </div><br><br>
 <div class="py-5 px-4 rounded text-white" style="background-color:rgb(210, 208, 208);">
     <h4 class="mb-4 text-center" style="color:rgb(16, 108, 205);">Whether infromatin of {{$fullCityName}}</h4>

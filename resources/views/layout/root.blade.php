@@ -23,7 +23,7 @@
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route ('about') }}">About</a></li>
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('terms') }}">Terms</a></li>
         <li class="nav-item"><a class="nav-link" style="color:white" href="{{ route('contact_us.form') }}">Contact Us</a></li>
-        @if(session('user_check'))
+        @if(session('user_id'))
         <a href="{{ route('logout') }}" class="btn btn-danger">
         Logout
     </a>

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  App\Models\UserData;
 use  App\Models\Contact;
+use  App\Models\RecentCity;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
@@ -92,6 +93,11 @@ class MainController extends Controller
 
     //function for dashboard from 
     function getCityName(Request $request){
+        //here we store user search city into db
+        $recent=new RecentCity();
+        $recent->search_city=$request->user_city;
+        $recent->user_id=session('user_id');
+        $recent->save();
         //get data from dashboard from where user entered city
             return $this->fetchApiData($request->user_city);
     }
@@ -105,8 +111,16 @@ class MainController extends Controller
               $fetchData=Http::get($url);
               $fetchData->body();
               $fullCityName=$cityName."[".$fetchData['location']['country']."]";//get city name and country
+
+              //here we fetch data from db and show in dashboard in recent 
+                $recentCity = Recentcity::where('user_id', session('user_id'))
+                      ->orderBy('created_at', 'desc')
+                      ->take(5)
+                      ->get();
+
+
               //all well so call dashboard view with real data
-          return view('dashboard',['Data'=>$fetchData->json(),'city_name'=>$cityName,'fullCityName'=>$fullCityName]);
+          return view('dashboard',['Data'=>$fetchData->json(),'city_name'=>$cityName,'fullCityName'=>$fullCityName,'recentCity'=>$recentCity]);
          } catch (\Throwable $th) {
             //if get any error call dashboard ui with error handling
               return view('dashboard',['city_name'=>$cityName,'fullCityName'=>'Data not fetch maybe wrong city enterd Or something went wrong']);
